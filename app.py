@@ -1,8 +1,13 @@
-from flask import Flask, request, jsonify
-from db import init_db, insert_ticket, list_tickets
+from flask import Flask, request, jsonify, render_template
+from db import init_db, insert_ticket, list_tickets, get_conn
 from rules import classify_ticket
 
 app = Flask(__name__)
+
+@app.get("/")
+def home():
+    return render_template("index.html")
+
 
 @app.get("/health")
 def health():
@@ -41,6 +46,33 @@ def create_ticket():
 def get_tickets():
     limit = int(request.args.get("limit", 50))
     return jsonify(list_tickets(limit=limit))
+
+
+@app.get("/stats")
+def stats():
+    with get_conn() as conn:
+        by_category = conn.execute("""
+            SELECT category, COUNT(*) AS count
+            FROM tickets
+            GROUP BY category
+            ORDER BY count DESC;
+        """).fetchall()
+
+        by_priority = conn.execute("""
+            SELECT priority, COUNT(*) AS count
+            FROM tickets
+            GROUP BY priority
+            ORDER BY count DESC;
+        """).fetchall()
+
+        total = conn.execute("SELECT COUNT(*) AS count FROM tickets;").fetchone()["count"]
+
+    return jsonify({
+        "total": total,
+        "by_category": [dict(r) for r in by_category],
+        "by_priority": [dict(r) for r in by_priority],
+    })
+
 
 if __name__ == "__main__":
     init_db()

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nexxo Ticket Automation</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div>
+        <h1>Nexxo Ticket Automation</h1>
+        <p class="muted">Interactive UI over a rule-based NLP ticket classifier (Flask + SQLite).</p>
+      </div>
+      <div class="pill">API: <span id="api-status">checking...</span></div>
+    </header>
+
+    <section class="card">
+      <h2>Create & Classify Ticket</h2>
+
+      <div class="grid">
+        <label>
+          Source
+          <select id="source">
+            <option value="email" selected>email</option>
+            <option value="form">form</option>
+            <option value="chat">chat</option>
+          </select>
+        </label>
+
+        <label class="span-2">
+          Subject
+          <input id="subject" type="text" placeholder="e.g., Server down - production outage" />
+        </label>
+
+        <label class="span-3">
+          Body
+          <textarea id="body" rows="5" placeholder="Describe the issue..."></textarea>
+        </label>
+
+        <div class="span-3 actions">
+          <button id="btn-create">Classify & Create</button>
+          <button id="btn-demo" class="secondary">Load Demo Text</button>
+          <button id="btn-refresh" class="secondary">Refresh Lists</button>
+        </div>
+      </div>
+
+      <div id="result" class="result hidden"></div>
+    </section>
+
+    <section class="row">
+      <div class="card">
+        <h2>Stats</h2>
+        <div id="stats" class="stats">Loading...</div>
+      </div>
+
+      <div class="card">
+        <h2>Recent Tickets</h2>
+        <div id="tickets">Loading...</div>
+      </div>
+    </section>
+
+    <footer class="footer muted">
+      Tip: Try keywords like “outage”, “phishing”, “invoice”, “vpn”, “password”, “wifi”.
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

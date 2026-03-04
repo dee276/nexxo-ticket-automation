@@ -1,0 +1,89 @@
+:root {
+  --bg: #0b1220;
+  --card: #111a2e;
+  --text: #e8eefc;
+  --muted: #a8b3cf;
+  --border: rgba(255,255,255,.12);
+  --accent: #6ea8fe;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: linear-gradient(180deg, #071022, #0b1220);
+  color: var(--text);
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.header { display:flex; justify-content:space-between; align-items:flex-start; gap: 12px; margin-bottom: 16px; }
+.muted { color: var(--muted); }
+
+.card {
+  background: rgba(17,26,46,.85);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  backdrop-filter: blur(6px);
+}
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+@media (max-width: 900px) { .row { grid-template-columns: 1fr; } }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+
+label { display:flex; flex-direction:column; gap:6px; font-size: 14px; color: var(--muted); }
+input, textarea, select {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--text);
+  outline: none;
+}
+textarea { resize: vertical; }
+
+.actions { display:flex; gap: 10px; flex-wrap: wrap; }
+button {
+  background: var(--accent);
+  color: #051225;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+button.secondary {
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.pill {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.result {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+}
+.hidden { display: none; }
+
+.kpi { display:flex; gap:10px; flex-wrap: wrap; margin-bottom: 10px; }
+.kpi .box { flex: 1; min-width: 140px; border: 1px solid var(--border); border-radius: 12px; padding: 10px; }
+.kpi .value { font-size: 24px; font-weight: 800; margin-top: 6px; color: var(--text); }
+
+table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+th, td { border-bottom: 1px solid rgba(255,255,255,.08); padding: 8px; font-size: 13px; text-align: left; }
+th { color: var(--muted); font-weight: 650; }
+
+.footer { margin-top: 14px; font-size: 13px; }
